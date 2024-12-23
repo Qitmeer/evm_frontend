@@ -66,6 +66,11 @@ declare module "nextjs-routes" {
     | DynamicRoute<"/tx/[hash]", { "hash": string }>
     | StaticRoute<"/txs">
     | DynamicRoute<"/txs/kettle/[hash]", { "hash": string }>
+    | DynamicRoute<"/utxoaddress/[hash]", { "hash": string }>
+    | DynamicRoute<"/utxoblock/[height_or_hash]", { "height_or_hash": string }>
+    | StaticRoute<"/utxoblocks">
+    | DynamicRoute<"/utxotx/[hash]", { "hash": string }>
+    | StaticRoute<"/utxotxs">
     | StaticRoute<"/validators">
     | StaticRoute<"/verified-contracts">
     | StaticRoute<"/visualize/sol2uml">

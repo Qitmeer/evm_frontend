@@ -3,7 +3,11 @@ import type { Reward } from 'types/api/reward';
 import type { Transaction } from 'types/api/transaction';
 
 import type { ArbitrumBatchStatus, ArbitrumL2TxData } from './arbitrumL2';
-import type { OptimisticL2BatchDataContainer, OptimisticL2BlobTypeEip4844, OptimisticL2BlobTypeCelestia } from './optimisticL2';
+import type {
+  OptimisticL2BatchDataContainer,
+  OptimisticL2BlobTypeEip4844,
+  OptimisticL2BlobTypeCelestia,
+} from './optimisticL2';
 import type { TokenInfo } from './token';
 import type { TokenTransfer } from './tokenTransfer';
 import type { ZkSyncBatchesItem } from './zkSyncL2';
@@ -12,7 +16,11 @@ export type BlockType = 'block' | 'reorg' | 'uncle';
 
 export interface BlockBaseFeeCelo {
   amount: string;
-  breakdown: Array<{ amount: string; percentage: number; address: AddressParam }>;
+  breakdown: Array<{
+    amount: string;
+    percentage: number;
+    address: AddressParam;
+  }>;
   recipient: AddressParam;
   token: TokenInfo;
 }
@@ -56,7 +64,10 @@ export interface Block {
   excess_blob_gas?: string;
   blob_tx_count?: number;
   // ZKSYNC FIELDS
-  zksync?: Omit<ZkSyncBatchesItem, 'number' | 'transaction_count' | 'timestamp'> & {
+  zksync?: Omit<
+    ZkSyncBatchesItem,
+    'number' | 'transaction_count' | 'timestamp'
+  > & {
     batch_number: number | null;
   };
   arbitrum?: ArbitrumBlockData;
@@ -85,7 +96,10 @@ type ArbitrumBlockData = {
 export interface OptimismBlockData {
   batch_data_container: OptimisticL2BatchDataContainer;
   internal_id: number;
-  blobs: Array<OptimisticL2BlobTypeEip4844> | Array<OptimisticL2BlobTypeCelestia> | null;
+  blobs:
+    | Array<OptimisticL2BlobTypeEip4844>
+    | Array<OptimisticL2BlobTypeCelestia>
+    | null;
   l1_timestamp: string;
   l1_transaction_hashes: Array<string>;
 }
@@ -93,9 +107,11 @@ export interface OptimismBlockData {
 export interface ZilliqaBlockData {
   view: number;
   quorum_certificate: ZilliqaQuorumCertificate;
-  aggregate_quorum_certificate: (ZilliqaQuorumCertificate & {
-    nested_quorum_certificates: Array<ZilliqaNestedQuorumCertificate>;
-  }) | null;
+  aggregate_quorum_certificate:
+    | (ZilliqaQuorumCertificate & {
+      nested_quorum_certificates: Array<ZilliqaNestedQuorumCertificate>;
+    })
+    | null;
 }
 
 export interface ZilliqaQuorumCertificate {
@@ -104,7 +120,8 @@ export interface ZilliqaQuorumCertificate {
   signers: Array<number>;
 }
 
-export interface ZilliqaNestedQuorumCertificate extends ZilliqaQuorumCertificate {
+export interface ZilliqaNestedQuorumCertificate
+  extends ZilliqaQuorumCertificate {
   proposed_by_validator_index: number;
 }
 
@@ -164,7 +181,11 @@ export interface BlockEpochElectionReward {
   total: string;
 }
 
-export type EpochRewardsType = 'group' | 'validator' | 'delegated_payment' | 'voter';
+export type EpochRewardsType =
+  | 'group'
+  | 'validator'
+  | 'delegated_payment'
+  | 'voter';
 
 export interface BlockEpoch {
   number: number;
@@ -173,7 +194,10 @@ export interface BlockEpoch {
     community_transfer: TokenTransfer | null;
     reserve_bolster_transfer: TokenTransfer | null;
   };
-  aggregated_election_rewards: Record<EpochRewardsType, BlockEpochElectionReward | null>;
+  aggregated_election_rewards: Record<
+    EpochRewardsType,
+    BlockEpochElectionReward | null
+  >;
 }
 
 export interface BlockEpochElectionRewardDetails {

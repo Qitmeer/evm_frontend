@@ -11,8 +11,8 @@ import { getResourceKey } from 'lib/api/useApiQuery';
 import useIsMobile from 'lib/hooks/useIsMobile';
 import useSocketChannel from 'lib/socket/useSocketChannel';
 import useSocketMessage from 'lib/socket/useSocketMessage';
-import BlocksList from 'ui/blocks/BlocksList';
-import BlocksTable from 'ui/blocks/BlocksTable';
+import UTXOBlocksList from 'ui/blocks/UTXOBlocksList';
+import UTXOBlocksTable from 'ui/blocks/UTXOBlocksTable';
 import ActionBar from 'ui/shared/ActionBar';
 import DataListDisplay from 'ui/shared/DataListDisplay';
 import IconSvg from 'ui/shared/IconSvg';
@@ -26,14 +26,17 @@ const TABS_HEIGHT = 88;
 
 interface Props {
   type?: BlockType;
-  query:
-    | QueryWithPagesResult<'blocks'>
-    | QueryWithPagesResult<'optimistic_l2_txn_batch_blocks'>;
+  query: QueryWithPagesResult<'utxoblocks'>;
   enableSocket?: boolean;
   top?: number;
 }
 
-const BlocksContent = ({ type, query, enableSocket = true, top }: Props) => {
+const UTXOBlocksContent = ({
+  type,
+  query,
+  enableSocket = true,
+  top,
+}: Props) => {
   const queryClient = useQueryClient();
   const isMobile = useIsMobile();
   const [ socketAlert, setSocketAlert ] = React.useState('');
@@ -43,7 +46,9 @@ const BlocksContent = ({ type, query, enableSocket = true, top }: Props) => {
   const handleNewBlockMessage: SocketMessage.NewBlock['handler'] =
     React.useCallback(
       (payload) => {
-        const queryKey = getResourceKey('blocks', { queryParams: { type } });
+        const queryKey = getResourceKey('utxoblocks', {
+          queryParams: { type },
+        });
 
         queryClient.setQueryData(
           queryKey,
@@ -121,14 +126,14 @@ const BlocksContent = ({ type, query, enableSocket = true, top }: Props) => {
             isLoading={ query.isPlaceholderData }
           />
         ) }
-        <BlocksList
+        <UTXOBlocksList
           data={ query.data.items }
           isLoading={ query.isPlaceholderData }
           page={ query.pagination.page }
         />
       </Box>
       <Box display={{ base: 'none', lg: 'block' }}>
-        <BlocksTable
+        <UTXOBlocksTable
           data={ query.data.items }
           top={ top || (query.pagination.isVisible ? TABS_HEIGHT : 0) }
           page={ query.pagination.page }
@@ -166,4 +171,4 @@ const BlocksContent = ({ type, query, enableSocket = true, top }: Props) => {
   );
 };
 
-export default React.memo(BlocksContent);
+export default React.memo(UTXOBlocksContent);

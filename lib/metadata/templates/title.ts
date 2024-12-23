@@ -7,16 +7,23 @@ const TEMPLATE_MAP: Record<Route['pathname'], string> = {
   '/txs': '%network_name% transactions - %network_name% explorer',
   '/txs/kettle/[hash]': '%network_name% kettle %hash% transactions',
   '/tx/[hash]': '%network_name% transaction %hash%',
+  '/utxotxs': '%network_name% transactions - %network_name% explorer',
+  '/utxotx/[hash]': '%network_name% transaction %hash%',
   '/blocks': '%network_name% blocks',
+  '/utxoblock/[height_or_hash]': '%network_name% block %height_or_hash%',
+  '/utxoblocks': '%network_name% blocks',
   '/block/[height_or_hash]': '%network_name% block %height_or_hash%',
   '/block/countdown': '%network_name% block countdown index',
   '/block/countdown/[height]': '%network_name% block %height% countdown',
   '/accounts': '%network_name% top accounts',
   '/accounts/label/[slug]': '%network_name% addresses search by label',
   '/address/[hash]': '%network_name% address details for %hash%',
-  '/verified-contracts': 'Verified %network_name% contracts lookup - %network_name% explorer',
+  '/utxoaddress/[hash]': '%network_name% address details for %hash%',
+  '/verified-contracts':
+    'Verified %network_name% contracts lookup - %network_name% explorer',
   '/contract-verification': '%network_name% verify contract',
-  '/address/[hash]/contract-verification': '%network_name% contract verification for %hash%',
+  '/address/[hash]/contract-verification':
+    '%network_name% contract verification for %hash%',
   '/tokens': 'Tokens list - %network_name% explorer',
   '/token/[hash]': '%network_name% token details',
   '/token/[hash]/instance/[id]': '%network_name% NFT instance',
@@ -35,7 +42,8 @@ const TEMPLATE_MAP: Record<Route['pathname'], string> = {
   '/account/tag-address': '%network_name% - private tags',
   '/account/verified-addresses': '%network_name% - my verified addresses',
   '/public-tags/submit': '%network_name% - public tag requests',
-  '/withdrawals': '%network_name% withdrawals - track on %network_name% explorer',
+  '/withdrawals':
+    '%network_name% withdrawals - track on %network_name% explorer',
   '/visualize/sol2uml': '%network_name% Solidity UML diagram',
   '/csv-export': '%network_name% export data to CSV',
   '/deposits': '%network_name% deposits (L1 > L2)',
@@ -61,7 +69,8 @@ const TEMPLATE_MAP: Record<Route['pathname'], string> = {
   '/login': '%network_name% login',
   '/sprite': '%network_name% SVG sprite',
   '/api/metrics': '%network_name% node API prometheus metrics',
-  '/api/monitoring/invalid-api-schema': '%network_name% node API prometheus metrics',
+  '/api/monitoring/invalid-api-schema':
+    '%network_name% node API prometheus metrics',
   '/api/log': '%network_name% node API request log',
   '/api/media-type': '%network_name% node API media type',
   '/api/proxy': '%network_name% node API proxy',
@@ -80,7 +89,9 @@ const TEMPLATE_MAP_ENHANCED: Partial<Record<Route['pathname'], string>> = {
 };
 
 export function make(pathname: Route['pathname'], isEnriched = false) {
-  const template = (isEnriched ? TEMPLATE_MAP_ENHANCED[pathname] : undefined) ?? TEMPLATE_MAP[pathname];
+  const template =
+    (isEnriched ? TEMPLATE_MAP_ENHANCED[pathname] : undefined) ??
+    TEMPLATE_MAP[pathname];
   const postfix = config.meta.promoteBlockscoutInTitle ? ' | Blockscout' : '';
 
   return (template + postfix).trim();
