@@ -1,10 +1,24 @@
 import type { Block, BlockEpochElectionReward, BlockEpoch } from 'types/api/block';
+import type { UTXOBlock } from 'types/api/qitmeer_block';
 
 import { ADDRESS_PARAMS } from './addressParams';
 import { TOKEN_INFO_ERC_20, TOKEN_TRANSFER_ERC_20 } from './token';
 
 export const BLOCK_HASH = '0x8fa7b9e5e5e79deeb62d608db22ba9a5cb45388c7ebb9223ae77331c6080dc70';
-
+export const UTXOBLOCK: UTXOBlock = {
+  block_order: 8988736,
+  height: 8988736,
+  coinbase: 0,
+  timestamp: '2023-05-12T19:29:12.000000Z',
+  tx_count: 142,
+  miner_hash: 'TODO',
+  hash: BLOCK_HASH,
+  pow_name: 'TODO',
+  difficulty: 'TODO',
+  parent_root: 'TODO',
+  status: 'TODO',
+  nonce: 0,
+};
 export const BLOCK: Block = {
   base_fee_per_gas: '10000000000',
   burnt_fees: '92834504000000000',

@@ -55,6 +55,11 @@ declare module "nextjs-routes" {
     | DynamicRoute<"/pools/[hash]", { "hash": string }>
     | StaticRoute<"/pools">
     | StaticRoute<"/public-tags/submit">
+    | DynamicRoute<"/qitmeer_address/[hash]", { "hash": string }>
+    | DynamicRoute<"/qitmeer_block/[height_or_hash]", { "height_or_hash": string }>
+    | StaticRoute<"/qitmeer_blocks">
+    | DynamicRoute<"/qitmeer_tx/[hash]", { "hash": string }>
+    | StaticRoute<"/qitmeer_txs">
     | StaticRoute<"/search-results">
     | StaticRoute<"/sprite">
     | DynamicRoute<"/stats/[id]", { "id": string }>

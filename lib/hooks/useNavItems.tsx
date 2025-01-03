@@ -50,7 +50,20 @@ export default function useNavItems(): ReturnType {
       icon: 'user_op',
       isActive: pathname === '/ops' || pathname === '/op/[hash]',
     } : null;
-
+    const utxoblocks: NavItem | null = {
+      text: 'Blocks',
+      nextRoute: { pathname: '/qitmeer_blocks' as const },
+      icon: 'block',
+      isActive:
+        pathname === '/qitmeer_blocks' || pathname === '/qitmeer_block/[height_or_hash]',
+    };
+    const utxotxs: NavItem | null = {
+      text: 'Transactions',
+      nextRoute: { pathname: '/qitmeer_txs' as const },
+      icon: 'transactions',
+      isActive:
+        pathname === '/qitmeer_txs' || pathname === '/qitmeer_tx/[hash]',
+    };
     const verifiedContracts: NavItem | null =
      {
        text: 'Verified contracts',
@@ -183,7 +196,7 @@ export default function useNavItems(): ReturnType {
         },
       ].filter(Boolean);
     }
-
+    const utxoblockchainNavItems = [ utxotxs, utxoblocks ].filter(Boolean);
     const tokensNavItems = [
       {
         text: 'Tokens',
@@ -251,39 +264,59 @@ export default function useNavItems(): ReturnType {
 
     const mainNavItems: ReturnType['mainNavItems'] = [
       {
+        text: 'UTXOExplorer',
+        icon: 'globe-b',
+        isActive: utxoblockchainNavItems
+          .flat()
+          .some((item) => isInternalItem(item) && item.isActive),
+        subItems: utxoblockchainNavItems,
+      },
+      {
         text: 'Blockchain',
         icon: 'globe-b',
-        isActive: blockchainNavItems.flat().some(item => isInternalItem(item) && item.isActive),
+        isActive: blockchainNavItems
+          .flat()
+          .some((item) => isInternalItem(item) && item.isActive),
         subItems: blockchainNavItems,
       },
       {
         text: 'Tokens',
         icon: 'token',
-        isActive: tokensNavItems.flat().some(item => isInternalItem(item) && item.isActive),
+        isActive: tokensNavItems
+          .flat()
+          .some((item) => isInternalItem(item) && item.isActive),
         subItems: tokensNavItems,
       },
-      config.features.marketplace.isEnabled ? {
-        text: 'DApps',
-        nextRoute: { pathname: '/apps' as const },
-        icon: 'apps',
-        isActive: pathname.startsWith('/app'),
-      } : null,
-      config.features.stats.isEnabled ? {
-        text: 'Charts & stats',
-        nextRoute: { pathname: '/stats' as const },
-        icon: 'stats',
-        isActive: pathname.startsWith('/stats'),
-      } : null,
+      config.features.marketplace.isEnabled ?
+        {
+          text: 'DApps',
+          nextRoute: { pathname: '/apps' as const },
+          icon: 'apps',
+          isActive: pathname.startsWith('/app'),
+        } :
+        null,
+      config.features.stats.isEnabled ?
+        {
+          text: 'Charts & stats',
+          nextRoute: { pathname: '/stats' as const },
+          icon: 'stats',
+          isActive: pathname.startsWith('/stats'),
+        } :
+        null,
       apiNavItems.length > 0 && {
         text: 'API',
         icon: 'restAPI',
-        isActive: apiNavItems.some(item => isInternalItem(item) && item.isActive),
+        isActive: apiNavItems.some(
+          (item) => isInternalItem(item) && item.isActive,
+        ),
         subItems: apiNavItems,
       },
       {
         text: 'Other',
         icon: 'gear',
-        isActive: otherNavItems.flat().some(item => isInternalItem(item) && item.isActive),
+        isActive: otherNavItems
+          .flat()
+          .some((item) => isInternalItem(item) && item.isActive),
         subItems: otherNavItems,
       },
     ].filter(Boolean);

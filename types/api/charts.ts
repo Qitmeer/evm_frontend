@@ -8,6 +8,7 @@ export interface ChartMarketItem {
   closing_price: string | null;
   market_cap?: string | null;
   tvl?: string | null;
+  transaction_count: number | null;
 }
 
 export interface ChartTransactionResponse {

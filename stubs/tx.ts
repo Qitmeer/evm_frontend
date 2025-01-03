@@ -1,10 +1,30 @@
+import type { UTXOTransaction } from 'types/api/qitmeer_tx';
 import type { RawTracesResponse } from 'types/api/rawTrace';
 import type { Transaction, TransactionsStats } from 'types/api/transaction';
 
 import { ADDRESS_PARAMS } from './addressParams';
 
 export const TX_HASH = '0x3ed9d81e7c1001bdda1caa1dc62c0acbbe3d2c671cdc20dc1e65efdaa4186967';
-
+export const UTXOTX: UTXOTransaction = {
+  hash: '0x2b824349b320cfa72f292ab26bf525adb00083ba9fa097141896c3c8c74567cc',
+  block_order: 0,
+  height: 9004925,
+  block_hash:
+    '0x2b824349b320cfa72f292ab26bf525adb00083ba9fa097141896c3c8c74567cc',
+  tx_index: 0,
+  index: 0,
+  size: 0,
+  spent_tx_hash:
+    '0x2b824349b320cfa72f292ab26bf525adb00083ba9fa097141896c3c8c74567cc',
+  tx_time: '2022-11-11T11:11:11.000000Z',
+  vin: '0x2b824349b320cfa72f292ab26bf525adb00083ba9fa097141896c3c8c74567cc',
+  to_address:
+    '0x2b824349b320cfa72f292ab26bf525adb00083ba9fa097141896c3c8c74567cc',
+  amount: '42000420000000000000',
+  fee: '2100000000000000',
+  pk_script: '',
+  status: 0,
+};
 export const TX: Transaction = {
   timestamp: '2022-11-11T11:11:11.000000Z',
   fee: {

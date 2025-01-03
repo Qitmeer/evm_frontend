@@ -69,6 +69,13 @@ const OG_TYPE_DICT: Record<Route['pathname'], OGPageType> = {
   '/api/healthz': 'Regular page',
   '/api/config': 'Regular page',
   '/api/sprite': 'Regular page',
+
+  // qitmeer pages
+  '/qitmeer_txs': 'Root page',
+  '/qitmeer_tx/[hash]': 'Regular page',
+  '/qitmeer_blocks': 'Root page',
+  '/qitmeer_block/[height_or_hash]': 'Regular page',
+  '/qitmeer_address/[hash]': 'Regular page',
 };
 
 export default function getPageOgType(pathname: Route['pathname']) {

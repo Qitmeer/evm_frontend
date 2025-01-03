@@ -4,15 +4,12 @@ import type { AddressFromToFilter } from 'types/api/address';
 
 import type { QueryWithPagesResult } from 'ui/shared/pagination/useQueryWithPages';
 
-import TxsContent from './TxsContent';
-import useTxsSort from './useTxsSort';
+import QitmeerTxsContent from './QitmeerTxsContent';
+import useQitmeerTxsSort from './useQitmeerTxsSort';
 
 type Props = {
   query:
-    | QueryWithPagesResult<'txs_validated' | 'txs_pending'>
-    | QueryWithPagesResult<'txs_watchlist'>
-    | QueryWithPagesResult<'block_txs'>
-    | QueryWithPagesResult<'zkevm_l2_txn_batch_txs'>;
+    | QueryWithPagesResult<'qitmeer_block_txs' | 'qitmeer_txs_validated'>;
   showBlockInfo?: boolean;
   showSocketInfo?: boolean;
   socketInfoAlert?: string;
@@ -24,7 +21,7 @@ type Props = {
   top?: number;
 };
 
-const TxsWithFrontendSorting = ({
+const QitmeerTxsWithFrontendSorting = ({
   filter,
   filterValue,
   query,
@@ -36,10 +33,11 @@ const TxsWithFrontendSorting = ({
   enableTimeIncrement,
   top,
 }: Props) => {
-  const { data, isPlaceholderData, isError, setSortByValue, sorting } = useTxsSort(query);
+  const { data, isPlaceholderData, isError, setSortByValue, sorting } =
+    useQitmeerTxsSort(query);
 
   return (
-    <TxsContent
+    <QitmeerTxsContent
       filter={ filter }
       filterValue={ filterValue }
       showBlockInfo={ showBlockInfo }
@@ -59,4 +57,4 @@ const TxsWithFrontendSorting = ({
   );
 };
 
-export default TxsWithFrontendSorting;
+export default QitmeerTxsWithFrontendSorting;

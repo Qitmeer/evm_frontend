@@ -1,13 +1,14 @@
 import type { UseQueryResult } from '@tanstack/react-query';
 import React from 'react';
 
-import type { TransactionsSortingValue, TxsResponse } from 'types/api/transaction';
+import type { UTXOBlockTransactionsResponse } from 'types/api/qitmeer_block';
+import type { TransactionsSortingValue } from 'types/api/transaction';
 import type { SelectOption } from 'ui/shared/select/types';
 
 import type { ResourceError } from 'lib/api/resources';
 import * as cookies from 'lib/cookies';
 
-import sortTxs from './sortTxs';
+import sortQitmeerTxs from './sortQitmeerTxs';
 
 export const SORT_OPTIONS: Array<SelectOption<TransactionsSortingValue>> = [
   { label: 'Default', value: undefined },
@@ -21,16 +22,16 @@ export const SORT_OPTIONS: Array<SelectOption<TransactionsSortingValue>> = [
 type SortingValue = TransactionsSortingValue | undefined;
 
 type HookResult = UseQueryResult<
-  TxsResponse,
+  UTXOBlockTransactionsResponse,
   ResourceError<unknown>
 > & {
   sorting: SortingValue;
   setSortByValue: (value: SortingValue) => void;
 };
 
-export default function useTxsSort(
+export default function useQitmeerTxsSort(
   queryResult: UseQueryResult<
-    TxsResponse,
+    UTXOBlockTransactionsResponse,
     ResourceError<unknown>
   >,
 ): HookResult {
@@ -58,7 +59,7 @@ export default function useTxsSort(
       ...queryResult,
       data: {
         ...queryResult.data,
-        items: queryResult.data.items.slice().sort(sortTxs(sorting)),
+        items: queryResult.data.items.slice().sort(sortQitmeerTxs(sorting)),
       },
       setSortByValue,
       sorting,

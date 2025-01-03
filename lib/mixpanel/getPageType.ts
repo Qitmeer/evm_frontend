@@ -67,6 +67,13 @@ export const PAGE_TYPE_DICT: Record<Route['pathname'], string> = {
   '/api/healthz': 'Node API: Health check',
   '/api/config': 'Node API: App config',
   '/api/sprite': 'Node API: SVG sprite content',
+
+  // qitmeer routes
+  '/qitmeer_txs': 'Transactions',
+  '/qitmeer_tx/[hash]': 'Transaction details',
+  '/qitmeer_blocks': 'Blocks',
+  '/qitmeer_block/[height_or_hash]': 'Block details',
+  '/qitmeer_address/[hash]': 'Address details',
 };
 
 export default function getPageType(pathname: Route['pathname']) {

@@ -34,7 +34,7 @@ export default function useApiInfiniteQuery<R extends PaginatedResources>({
       return apiFetch(resourceName, { pathParams, queryParams }) as Promise<TQueryData<R>>;
     },
     initialPageParam: null,
-    getNextPageParam: (lastPage) => {
+    getNextPageParam: (lastPage: TQueryData<R>) => {
       return lastPage.next_page_params as TPageParam<R>;
     },
     ...queryOptions,
